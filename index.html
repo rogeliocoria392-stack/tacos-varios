@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tacos Varios La Gran Bendición</title>
+  <!-- Fuentes Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    /* VARIABLES DE VIDRIO / TRASLÚCIDO */
+    :root {
+      --accent-warm: #f4a261;
+      --accent-soft: #e9c46a;
+      --accent-glow: rgba(244, 162, 97, 0.3);
+      
+      /* EFECTO CRISTAL / VIDRIO TRANSPARENTE */
+      --glass-card: rgba(0, 0, 0, 0.55);
+      --glass-card-hover: rgba(0, 0, 0, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --glass-header: rgba(0, 0, 0, 0.65);
+      
+      --text-main: #ffffff;
+      --text-muted: #f0e6df;
+      --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      /* FONDO OSCURO BASE CON OVERLAY Y LA NUEVA IMAGEN 'images' */
+      background-color: #0b1325;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('images.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* BARRA DE NAVEGACIÓN VIDRIOSA */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--glass-header);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent-soft);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-warm);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      padding: 80px 20px 40px;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .tagline {
+      display: inline-block;
+      padding: 6px 18px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 30px;
+      color: var(--accent-soft);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 15px;
+      text-shadow: 0 4px 25px rgba(0,0,0,0.8);
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 35px;
+      font-weight: 300;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+    }
+
+    .hero-banner {
+      width: 100%;
+      max-width: 900px;
+      height: 420px;
+      margin: 0 auto;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      animation: floatSmooth 6s ease-in-out infinite;
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* SECCIÓN DE PRECIOS Y PROMOCIÓN */
+    .promo-section {
+      max-width: 1100px;
+      margin: 40px auto 0;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .promo-card {
+      background: rgba(244, 162, 97, 0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(244, 162, 97, 0.4);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .promo-card.highlight {
+      background: rgba(233, 196, 106, 0.25);
+      border-color: var(--accent-soft);
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .promo-badge {
+      display: inline-block;
+      background: var(--accent-warm);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .promo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .promo-price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent-soft);
+      margin: 5px 0;
+    }
+
+    .price-list {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .price-item .name {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .price-item .val {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-soft);
+    }
+
+    /* MENÚ SECCIÓN */
+    .menu-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px 40px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem;
+      color: var(--accent-soft);
+      text-shadow: 0 3px 15px rgba(0,0,0,0.8);
+    }
+
+    /* GRID DE TARJETAS TRANSPARENTES (GLASSMORPHISM) */
+    .guisados-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--glass-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+    .card:nth-child(6) { animation-delay: 0.6s; }
+    .card:nth-child(7) { animation-delay: 0.7s; }
+
+    .card:hover {
+      transform: translateY(-8px);
+      background: var(--glass-card-hover);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 25px var(--accent-glow);
+    }
+
+    .card-img-wrapper {
+      width: 100%;
+      height: 230px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover .card-img-wrapper img {
+      transform: scale(1.06);
+    }
+
+    .card-content {
+      padding: 24px;
+      background: transparent;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .card-description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* APARTADO EXCLUSIVO PARA EL VIDEO */
+    .video-section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .video-card {
+      background: var(--glass-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 30px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-card video {
+      width: 100%;
+      max-width: 400px;
+      max-height: 550px;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      background: #000;
+      outline: none;
+      margin-top: 15px;
+    }
+
+    /* SECCIÓN UBICACIÓN */
+    .location-section {
+      max-width: 900px;
+      margin: 20px auto 60px;
+      padding: 0 20px;
+    }
+
+    .location-card {
+      background: var(--glass-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-maps {
+      display: inline-block;
+      margin-top: 10px;
+      background: rgba(244, 162, 97, 0.2);
+      border: 1px solid var(--accent-warm);
+      color: var(--accent-soft);
+      padding: 12px 32px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-maps:hover {
+      background: var(--accent-warm);
+      color: #000;
+      box-shadow: 0 0 20px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    footer {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-top: 1px solid var(--glass-border);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    /* ANIMACIONES */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatSmooth {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-banner {
+        height: 260px;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <nav>
+    <div class="logo">La Gran Bendición</div>
+    <ul class="nav-links">
+      <li><a href="#menu">Guisados</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#video-apartado">Video</a></li>
+      <li><a href="#ubicacion">Ubicación</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECCIÓN PRINCIPAL (HERO) -->
+  <header class="hero">
+    <span class="tagline">Sabor Casero & Auténtico</span>
+    <h1>Tacos Varios La Gran Bendición</h1>
+    <p>Guisados tradicionales preparados diariamente con los ingredientes más frescos y el sazón de la casa.</p>
+    
+    <div class="hero-banner">
+      <img src="1000059811.jpg" alt="Tacos Varios Servidos" onerror="fixImageExtension(this)">
+    </div>
+  </header>
+
+  <!-- SECCIÓN DE PROMOCIÓN Y PRECIOS -->
+  <section class="promo-section" id="precios">
+    <!-- Tarjeta Promoción Apertura -->
+    <div class="promo-card highlight">
+      <span class="promo-badge">¡Gran Apertura!</span>
+      <h3 class="promo-title">Paquete Especial</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">3 Tacos de tus guisados favoritos + 1 Soda bien fría</p>
+      <div class="promo-price">$100 <span style="font-size:1rem; font-weight:normal;">MXN</span></div>
+    </div>
+
+    <!-- Tarjeta Precios Individuales -->
+    <div class="promo-card">
+      <h3 class="promo-title">Nuestros Precios</h3>
+      <div class="price-list">
+        <div class="price-item">
+          <div class="name">Taco Vario</div>
+          <div class="val">$30</div>
+        </div>
+        <div style="width:1px; height:40px; background:var(--glass-border);"></div>
+        <div class="price-item">
+          <div class="name">Lonche</div>
+          <div class="val">$100</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENÚ DE GUISADOS -->
+  <main class="menu-section" id="menu">
+    <div class="section-header">
+      <h2>Nuestros Guisados del Día</h2>
+    </div>
+
+    <div class="guisados-grid">
+
+      <!-- Tarjeta 1: Torta de Huevo -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <img src="1000059796.jpg" alt="Torta de Huevo en Salsa" onerror="fixImageExtension(this)">
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Torta de Huevo en Salsa</h3>
+          <p class="card-description">Jugosas tortitas de huevo capeadas en una deliciosa salsa roja sazonada.</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2: Papas con Chorizo -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <img src="1000059797.jpg" alt="Papas con Chorizo" onerror="fixImageExtension(this)">
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Papas con Chorizo</h3>
+          <p class="card-description">Guisado clásico de papas suaves combinadas con chorizo dorado y especias.</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3: Rajas con Crema -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <img src="1000059802.jpg" alt="Rajas con Crema y Elote" onerror="fixImageExtension(this)">
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Rajas con Crema</h3>
+          <p class="card-description">Rajas de chile poblano tierno asado con granos de elote en salsa cremosa.</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 4: Carne con Nopales -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <img src="1000059805.jpg" alt="Carne de Puerco con Nopales" onerror="fixImageExtension(this)">
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Carne con Nopales</h3>
+          <p class="card-description">Jugosa carne sofrita con nopales frescos en salsa roja tradicional.</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 5: Carne Deshebrada -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <img src="1000059807.jpg" alt="Carne Deshebrada" onerror="fixImageExtension(this)">
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Carne Deshebrada</h3>
+          <p class="card-description">Carne de res deshebrada suave en una rica salsa roja especiada.</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 6: Bisteck con Papas -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <img src="1000059823.jpg" alt="Bisteck con Papas" onerror="fixImageExtension(this)">
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Bisteck con Papas</h3>
+          <p class="card-description">Bisteck suavecito sazonado con papas guisadas en su propio jugo.</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 7: Chicharrón en Salsa Verde -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <img src="1000059826.jpg" alt="Chicharrón en Salsa Verde" onerror="fixImageExtension(this)">
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Chicharrón en Salsa Verde</h3>
+          <p class="card-description">Crujiente y suave chicharrón preparado en una rica salsa verde casera.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- APARTADO EXCLUSIVO PARA EL VIDEO -->
+  <section class="video-section" id="video-apartado">
+    <div class="video-card">
+      <h2 class="promo-title" style="font-size: 2rem;">Conoce Nuestros Guisados</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Mira la preparación fresca de cada día</p>
+      <video id="promoVideo" controls poster="1000059811.jpg">
+        <source src="1000060082.mp4" type="video/mp4">
+        <source src="1000060082.MP4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+      </video>
+    </div>
+  </section>
+
+  <!-- SECCIÓN UBICACIÓN -->
+  <section class="location-section" id="ubicacion">
+    <div class="location-card">
+      <a href="https://www.google.com/maps/search/?api=1&query=Dogos+hamburguesas+y+botanas+el+chino+Av.+Nuevo+Le%C3%B3n+111+Tijuana" target="_blank" class="btn-maps">
+        Ubicación
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Tacos Varios La Gran Bendición. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- SCRIPT DE SEGURIDAD PARA IMÁGENES Y FONDO -->
+  <script>
+    function fixImageExtension(img) {
+      if (!img.dataset.retried) {
+        img.dataset.retried = "true";
+        if (img.src.endsWith(".jpg")) {
+          img.src = img.src.replace(".jpg", ".JPG");
+        } else if (img.src.endsWith(".JPG")) {
+          img.src = img.src.replace(".JPG", ".jpg");
+        }
+      }
+    }
+
+    // Script inteligente para detectar el formato de la imagen 'images'
+    window.addEventListener('DOMContentLoaded', () => {
+      const formats = ['images.jpeg', 'images.jpg', 'images.png', 'images'];
+      let loaded = false;
+
+      formats.forEach(file => {
+        if (loaded) return;
+        const img = new Image();
+        img.src = file;
+        img.onload = () => {
+          if (!loaded) {
+            loaded = true;
+            document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${file}')`;
+          }
+        };
+      });
+    });
+  </script>
+</body>
+</html>
